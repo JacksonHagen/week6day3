@@ -1,7 +1,24 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-2"></div>
+    <div class="row p-2">
+      <div class="col-2">
+        <button
+          class="btn btn-info square-right"
+          data-bs-target="#nav"
+          data-bs-toggle="offcanvas"
+        >
+          Nav
+        </button>
+        <button
+          class="btn btn-success square-left"
+          data-bs-target="#create-car-modal"
+          data-bs-toggle="modal"
+          v-if="user.isAuthenticated"
+        >
+          Create
+        </button>
+      </div>
+      <!-- NOTE user.isAuthenticated is making sure the user is logged in - hiding the button if they are not logged in -->
     </div>
     <div class="row p-2">
       <Car v-for="c in cars" :key="c.id" :car="c" />
@@ -41,6 +58,7 @@ export default {
     return {
       // NOTE remember that this is retrieving the data from appstate
       cars: computed(() => AppState.cars),
+      user: computed(() => AppState.user),
     };
   },
 };
